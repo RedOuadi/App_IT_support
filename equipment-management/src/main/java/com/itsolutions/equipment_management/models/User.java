@@ -9,7 +9,7 @@ import lombok.Setter;
 import java.util.List;
 
 @Getter @Setter @Entity
-@Table(name = "User")
+@Table(name = "utilisateur")
 public class User extends Personne {
 
     private String fonction;
@@ -24,6 +24,6 @@ public class User extends Personne {
     public User() {
         this.setRole("ROLE_USER");
     }
-    
+
 
 }

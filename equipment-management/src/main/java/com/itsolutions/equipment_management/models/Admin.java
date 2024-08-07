@@ -7,7 +7,7 @@ import lombok.Setter;
 
 
 @Getter @Setter @Entity
-@Table(name = "`admin`")
+@Table(name = "admin")
 public class Admin extends Personne {
     private String departement;
 
