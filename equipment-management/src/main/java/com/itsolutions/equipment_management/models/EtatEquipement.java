@@ -4,4 +4,5 @@ public enum EtatEquipement {
     EN_PANNE,
     EN_REPARATION,
     HORS_SERVICE
+
 }

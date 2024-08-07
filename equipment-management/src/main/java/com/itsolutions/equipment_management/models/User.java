@@ -11,6 +11,7 @@ import java.util.List;
 @Getter @Setter @Entity
 @Table(name = "User")
 public class User extends Personne {
+
     private String fonction;
 
     @OneToMany(mappedBy = "user")
@@ -23,5 +24,6 @@ public class User extends Personne {
     public User() {
         this.setRole("ROLE_USER");
     }
+    
 
 }

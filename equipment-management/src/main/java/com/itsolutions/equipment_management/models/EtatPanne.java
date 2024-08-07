@@ -5,4 +5,5 @@ public enum EtatPanne {
     EN_DIAGNOSTIC,
     EN_REPARATION,
     RESOLU
+
 }

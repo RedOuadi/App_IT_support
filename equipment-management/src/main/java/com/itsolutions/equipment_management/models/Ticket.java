@@ -33,5 +33,6 @@ public class Ticket {
     private Equipment equipment;
 
 
+
 }
 
