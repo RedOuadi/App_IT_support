@@ -30,10 +30,12 @@ public class PersonneController {
             return ResponseEntity.status(400).body("Email already registered");
         }
 
-        // Ne pas encoder le mot de passe ici
+        // Encode the password before saving
+        userRequest.setMotDePasse(passwordEncoder.encode(userRequest.getMotDePasse()));
         Personne newUser = personneService.registerPersonne(userRequest);
         return ResponseEntity.ok("User registered successfully");
     }
+
 
     @PostMapping("/login")
     public ResponseEntity<?> loginUser(@RequestBody Personne userRequest) {
@@ -42,9 +44,6 @@ public class PersonneController {
             Personne foundUser = optionalUser.get();
             String rawPassword = userRequest.getMotDePasse();
             String encodedPassword = foundUser.getMotDePasse();
-
-            System.out.println("Raw password: " + rawPassword);
-            System.out.println("Encoded password from database: " + encodedPassword);
 
             if (passwordEncoder.matches(rawPassword, encodedPassword)) {
                 String role = foundUser.getRole();
@@ -61,6 +60,7 @@ public class PersonneController {
         }
         return ResponseEntity.status(401).body("Invalid email or password");
     }
+
 
 
     @DeleteMapping("/delete/{id}")

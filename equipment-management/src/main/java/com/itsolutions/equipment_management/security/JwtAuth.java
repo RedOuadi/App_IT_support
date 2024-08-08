@@ -15,6 +15,7 @@ public class JwtAuth {
     @Value("${security.jwt.secret-key}")
     private String secretKey;
 
+
     public String generateToken(String username, String role) {
         Key key = Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8));
         return Jwts.builder()

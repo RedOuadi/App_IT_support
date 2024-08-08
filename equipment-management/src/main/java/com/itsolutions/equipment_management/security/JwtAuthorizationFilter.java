@@ -25,6 +25,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
     @Value("${security.jwt.secret-key}")
     private String secretKey;
 
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String authorizationToken = request.getHeader("Authorization");

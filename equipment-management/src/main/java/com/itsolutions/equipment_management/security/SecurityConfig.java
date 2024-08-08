@@ -23,6 +23,7 @@ public class SecurityConfig {
     public SecurityConfig(JwtAuthorizationFilter jwtAuthorizationFilter, PersonneService personneService) {
         this.jwtAuthorizationFilter = jwtAuthorizationFilter;
         this.personneService = personneService;
+
     }
 
     @Bean
@@ -31,8 +32,12 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/users/register", "/api/users/login").permitAll()
+                        .requestMatchers("/api/users/login", "/api/users/register").permitAll()
                         .requestMatchers("/api/users/delete").hasAnyRole("ADMIN")
+                        .requestMatchers("/api/users/**", "/api/equipements/**", "/api/techniciens/**","/api/pannes/**").hasRole("ADMIN")
+                        .requestMatchers("/api/tickets/create").authenticated()
+                        .requestMatchers("/api/tickets/create").hasRole("USER")
+                        .requestMatchers("api/panne-equipment/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class);
