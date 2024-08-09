@@ -32,7 +32,12 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/equipment/**").permitAll()
+                        .requestMatchers("/api/users/login", "/api/users/register").permitAll()
+                        .requestMatchers("/api/users/delete").hasAnyRole("ADMIN")
+                        .requestMatchers("/api/users/**", "/api/equipement/**", "/api/techniciens/**","/api/pannes/**").hasRole("ADMIN")
+                        .requestMatchers("/api/tickets/create").authenticated()
+                        .requestMatchers("/api/tickets/create").hasRole("USER")
+                        .requestMatchers("api/panne-equipment/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class);

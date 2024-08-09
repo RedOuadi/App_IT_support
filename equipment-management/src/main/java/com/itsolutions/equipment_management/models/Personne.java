@@ -1,5 +1,7 @@
 package com.itsolutions.equipment_management.models;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,6 +15,12 @@ import java.util.Collection;
 import java.util.Collections;
 
 @Inheritance(strategy = InheritanceType.JOINED)
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = User.class, name = "user"),
+        @JsonSubTypes.Type(value = Technicien.class, name = "technicien"),
+        @JsonSubTypes.Type(value = Admin.class, name = "admin")
+})
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter @Setter

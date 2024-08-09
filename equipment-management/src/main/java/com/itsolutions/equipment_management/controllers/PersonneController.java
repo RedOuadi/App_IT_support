@@ -45,7 +45,10 @@ public class PersonneController {
             String rawPassword = userRequest.getMotDePasse();
             String encodedPassword = foundUser.getMotDePasse();
 
-            if (passwordEncoder.matches(rawPassword, encodedPassword)) {
+            System.out.println("Raw password: " + rawPassword);
+            System.out.println("Encoded password from database: " + encodedPassword);
+
+            passwordEncoder.matches(rawPassword, encodedPassword);
                 String role = foundUser.getRole();
                 String token = jwtAuth.generateToken(foundUser.getEmail(), role);
 
@@ -57,8 +60,6 @@ public class PersonneController {
             } else {
                 return ResponseEntity.status(401).body("Invalid password");
             }
-        }
-        return ResponseEntity.status(401).body("Invalid email or password");
     }
 
 
