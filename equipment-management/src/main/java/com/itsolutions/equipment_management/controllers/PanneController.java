@@ -1,6 +1,6 @@
 package com.itsolutions.equipment_management.controllers;
 
-import com.itsolutions.equipment_management.models.EtatPanne;
+   import com.itsolutions.equipment_management.models.EtatPanne;
 import com.itsolutions.equipment_management.models.Panne;
 import com.itsolutions.equipment_management.services.PanneService;
 import org.springframework.beans.factory.annotation.Autowired;
