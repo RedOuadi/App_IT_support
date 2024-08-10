@@ -3,7 +3,7 @@ package com.itsolutions.equipment_management.models;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 
 @Data
@@ -19,7 +19,14 @@ public class Ticket {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String description;
-    private LocalDateTime dateCreation;
+    private Date dateCreation;
+    @PrePersist
+    protected void onCreate() {
+        this.dateCreation = new Date();
+    }
+    @ManyToOne
+    @JoinColumn(name = "technicien_id")
+    private Technicien technicien;
 
     @Enumerated(EnumType.STRING)
     private EtatTicket etatTicket;
@@ -28,11 +35,10 @@ public class Ticket {
     @JoinColumn(name = "user_id")
     private User user;
 
+
     @ManyToOne
-    @JoinColumn(name = "equipment_id")
-    private Equipment equipment;
-
-
+    @JoinColumn(name = "panne_id")
+    private Panne panne;
 
 }
 

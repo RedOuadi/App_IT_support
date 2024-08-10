@@ -1,5 +1,6 @@
 package com.itsolutions.equipment_management.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -8,22 +9,19 @@ import lombok.Setter;
 
 import java.util.List;
 
-@Getter @Setter @Entity
+@Getter
+@Setter
+@Entity
 @Table(name = "utilisateur")
 public class User extends Personne {
-
     private String fonction;
 
     @OneToMany(mappedBy = "user")
+    @JsonIgnore
     private List<Ticket> tickets;
 
-    @Override
-    public String getRole() {
-        return "ROLE_USER";
-    }
     public User() {
-        this.setRole("ROLE_USER");
+        super();
+        this.setRole(Role.ROLE_USER);
     }
-
-
 }

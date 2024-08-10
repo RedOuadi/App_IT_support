@@ -13,6 +13,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 @Inheritance(strategy = InheritanceType.JOINED)
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
@@ -23,10 +25,11 @@ import java.util.Collections;
 })
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter @Setter
+@Getter
+@Setter
 @Entity
 @Table(name = "Personne")
-public class Personne implements UserDetails {
+public abstract class Personne implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,13 +40,19 @@ public class Personne implements UserDetails {
 
     @Column(unique = true, nullable = false)
     private String email;
+
     @Column(unique = true, nullable = false)
     private String motDePasse;
-    private String role;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+    @Column(name = "username", unique = true, nullable = false)
+    private String username;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singletonList(new SimpleGrantedAuthority(getRole()));
+        return Collections.singletonList(new SimpleGrantedAuthority(role.name()));
     }
 
     @Override
@@ -76,5 +85,10 @@ public class Personne implements UserDetails {
         return true;
     }
 
+    @ElementCollection(fetch = FetchType.EAGER)
+    private Set<String> roles = new HashSet<>();
 
+    public boolean hasRole(String role) {
+        return roles.contains(role);
+    }
 }

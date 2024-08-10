@@ -5,5 +5,4 @@ public enum EtatTicket {
     EN_COURS,
     RESOLU,
     FERME
-
 }
