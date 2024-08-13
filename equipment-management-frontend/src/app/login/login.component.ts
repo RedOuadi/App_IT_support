@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../auth.service';
-import { HttpClient } from '@angular/common/http';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { PersonneService } from "../Service/PersonneService";
 
 @Component({
   selector: 'app-login',
@@ -9,32 +9,39 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  email: string = '';
-  password: string = '';
+  loginForm: FormGroup;
 
-  constructor(private authService: AuthService, private http: HttpClient, private router: Router) { }
+  constructor(private fb: FormBuilder, private personneService: PersonneService, private router: Router) {
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      motDePasse: ['', Validators.required],
+      type: ['', Validators.required]
+    });
+  }
 
   login(): void {
-    this.http.post<{ token: string, role: string }>('/api/users/login', { email: this.email, password: this.password })
-      .subscribe(response => {
-        this.authService.setToken(response.token);
-        this.authService.setRole(response.role);
-
-        switch (response.role) {
-          case 'ROLE_ADMIN':
-            this.router.navigate(['/admin-dashboard']);
-            break;
-          case 'ROLE_USER':
-            this.router.navigate(['/user-dashboard']);
-            break;
-          case 'ROLE_TECHNICIEN':
-            this.router.navigate(['/technicien-dashboard']);
-            break;
-          default:
-            this.router.navigate(['/login']);
+    if (this.loginForm.valid) {
+      const { email, motDePasse, type } = this.loginForm.value;
+      const loginData = {
+        email: email,
+        motDePasse: motDePasse,
+        type: type
+      };
+      this.personneService.login(loginData).subscribe(
+        response => {
+          this.personneService.setToken(response.token);
+          this.personneService.setCurrentUser({
+            email: email,
+            role: response.role,
+            motDePasse: motDePasse,
+            type: type
+          });
+          this.personneService.redirectToDashboard();
+        },
+        error => {
+          console.error('Login error', error);
         }
-      }, error => {
-        console.error('Login error', error);
-      });
+      );
+    }
   }
 }
