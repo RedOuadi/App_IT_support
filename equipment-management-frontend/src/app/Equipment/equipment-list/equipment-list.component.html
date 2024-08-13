@@ -1,0 +1,31 @@
+<div class="container mt-5">
+  <h2 class="text-center">Equipments</h2>
+
+  <div class="mb-4">
+    <input class="form-control" [(ngModel)]="searchTerm" (input)="search()" placeholder="Search by name" />
+  </div>
+
+  <div class="row">
+    <div *ngFor="let equipment of equipments" class="col-md-4 mb-4">
+      <div class="card">
+        <div class="card-header bg-primary text-white">
+          <h5 class="card-title">{{ equipment.nom }}</h5>
+        </div>
+        <div class="card-body">
+          <p><strong>ID:</strong> {{ equipment.id }}</p>
+          <p><strong>Type:</strong> {{ equipment.type }}</p>
+          <p><strong>State:</strong> {{ equipment.etatEquipement }}</p>
+        </div>
+        <div class="card-footer">
+          <button class="btn btn-danger btn-sm" (click)="deleteEquipment(equipment.id)">Delete</button>
+          <a [routerLink]="['/equipments/edit', equipment.id]" class="btn btn-warning btn-sm">Edit</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="text-center mt-4">
+    <a routerLink="/equipments/new" class="btn btn-success">Add New Equipment</a>
+  </div>
+</div>
+
