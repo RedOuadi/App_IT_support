@@ -15,18 +15,14 @@ export class LoginComponent {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       motDePasse: ['', Validators.required],
-      type: ['', Validators.required]
     });
   }
 
   login(): void {
     if (this.loginForm.valid) {
-      const { email, motDePasse, type } = this.loginForm.value;
-      const loginData = {
-        email: email,
-        motDePasse: motDePasse,
-        type: type
-      };
+      const { email, motDePasse } = this.loginForm.value;
+      const loginData = { email, motDePasse };
+
       this.personneService.login(loginData).subscribe(
         response => {
           this.personneService.setToken(response.token);
@@ -34,7 +30,6 @@ export class LoginComponent {
             email: email,
             role: response.role,
             motDePasse: motDePasse,
-            type: type
           });
           this.personneService.redirectToDashboard();
         },

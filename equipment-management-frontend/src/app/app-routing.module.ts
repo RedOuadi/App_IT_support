@@ -1,19 +1,54 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { TechnicianDashboardComponent } from './technician-dashboard/technician-dashboard.component';
 import { LoginComponent } from './login/login.component';
-import {RegisterComponent} from "./register/register.component";
+
+
 import {HomeComponent} from "./home/home.component";
+import {RegisterComponent} from "./register/register.component";
+import {EquipmentListComponent} from "./Equipment/equipment-list/equipment-list.component";
+import {EquipmentFormComponent} from "./Equipment/equipment-form/equipment-form.component";
+import {PanneListComponent} from "./Panne/panne-list/panne-list.component";
+import {PanneFormComponent} from "./Panne/panne-form/panne-form.component";
+import {PanneDetailComponent} from "./Panne/panne-detail/panne-detail.component";
+import {PanneSearchComponent} from "./Panne/panne-search/panne-search.component";
+import {PanneEquipmentListComponent} from "./Panne/panne-equipment/panne-equipment-list.component";
+import {CreateTicketComponent} from "./Ticket/create-ticket/create-ticket.component";
+import {AdminTicketsComponent} from "./Ticket/admin-tickets/admin-tickets.component";
+import {TechnicienTicketsComponent} from "./Ticket/technicien-tickets/technicien-tickets.component";
+import {TicketListComponent} from "./Ticket/ticket-list/ticket-list.component";
+
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
+  { path: 'user-dashboard', component: UserDashboardComponent },
+  { path: 'admin-dashboard', component: AdminDashboardComponent },
+  { path: 'technician-dashboard', component: TechnicianDashboardComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: '', redirectTo: '/equipments', pathMatch: 'full' }
+  { path: 'equipments', component: EquipmentListComponent },
+  { path: 'equipments/new', component: EquipmentFormComponent },
+  { path: 'equipments/edit/:id', component: EquipmentFormComponent },
+  { path: 'pannes', component: PanneListComponent },
+  { path: 'pannes/new', component: PanneFormComponent },
+  { path: 'pannes/edit/:id', component: PanneFormComponent },
+  { path: 'pannes/detail/:id', component: PanneDetailComponent },
+
+  { path: 'pannes/search', component: PanneSearchComponent },
+  { path: 'panne-equipment', component: PanneEquipmentListComponent },
+  { path: 'create-ticket', component: CreateTicketComponent },
+  { path: 'admin-tickets', component: AdminTicketsComponent },
+  { path: 'technicien-tickets', component: TechnicienTicketsComponent },
+  { path: 'tickets', component: TicketListComponent },
+  { path: 'home', component: HomeComponent },
+
+
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

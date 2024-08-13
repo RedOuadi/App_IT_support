@@ -1,0 +1,74 @@
+<div class="container mt-5">
+  <h2>Create Ticket</h2>
+
+  <form [formGroup]="ticketForm" (ngSubmit)="onSubmit()">
+    <!-- Description Field -->
+    <div class="form-group mb-3">
+      <label for="description">Description</label>
+      <textarea
+        id="description"
+        formControlName="description"
+        class="form-control"
+        rows="3"
+        placeholder="Enter ticket description"
+        required
+      ></textarea>
+      <div *ngIf="ticketForm.get('description')?.invalid && ticketForm.get('description')?.touched" class="text-danger">
+        Description is required.
+      </div>
+    </div>
+
+    <!-- Etat Ticket Field -->
+    <div class="form-group mb-3">
+      <label for="etatTicket">Ticket Status</label>
+      <select
+        id="etatTicket"
+        formControlName="etatTicket"
+        class="form-select"
+      >
+        <option [ngValue]="EtatTicket.OUVERT">Open</option>
+        <option [ngValue]="EtatTicket.EN_COURS">In Progress</option>
+        <option [ngValue]="EtatTicket.RESOLU">Resolved</option>
+        <option [ngValue]="EtatTicket.FERME">Closed</option>
+      </select>
+    </div>
+
+    <!-- User ID Field -->
+    <div class="form-group mb-3">
+      <label for="userId">User ID</label>
+      <input
+        type="number"
+        id="userId"
+        formControlName="userId"
+        class="form-control"
+        placeholder="Enter user ID"
+        required
+      />
+      <div *ngIf="ticketForm.get('userId')?.invalid && ticketForm.get('userId')?.touched" class="text-danger">
+        User ID is required.
+      </div>
+    </div>
+
+    <!-- Panne ID Field -->
+    <div class="form-group mb-3">
+      <label for="panneId">Panne ID</label>
+      <input
+        type="number"
+        id="panneId"
+        formControlName="panneId"
+        class="form-control"
+        placeholder="Enter panne ID"
+        required
+      />
+      <div *ngIf="ticketForm.get('panneId')?.invalid && ticketForm.get('panneId')?.touched" class="text-danger">
+        Panne ID is required.
+      </div>
+    </div>
+
+    <!-- Hidden User Type Field -->
+    <input type="hidden" formControlName="userType" />
+
+    <!-- Submit Button -->
+    <button type="submit" class="btn btn-primary" [disabled]="ticketForm.invalid">Create Ticket</button>
+  </form>
+</div>
