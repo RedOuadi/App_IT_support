@@ -19,6 +19,7 @@ import {CreateTicketComponent} from "./Ticket/create-ticket/create-ticket.compon
 import {AdminTicketsComponent} from "./Ticket/admin-tickets/admin-tickets.component";
 import {TechnicienTicketsComponent} from "./Ticket/technicien-tickets/technicien-tickets.component";
 import {TicketListComponent} from "./Ticket/ticket-list/ticket-list.component";
+import {UserTicketsComponent} from "./Ticket/user-tickets/user-tickets.component";
 
 
 const routes: Routes = [
@@ -43,6 +44,33 @@ const routes: Routes = [
   { path: 'technicien-tickets', component: TechnicienTicketsComponent },
   { path: 'tickets', component: TicketListComponent },
   { path: 'home', component: HomeComponent },
+
+  { path: 'admin', component: AdminDashboardComponent, children: [
+      { path: 'equipments', component: EquipmentListComponent },
+      { path: 'pannes', component: PanneListComponent },
+      { path: 'admin-tickets', component: TicketListComponent },
+      { path: '', redirectTo: 'equipments', pathMatch: 'full' },
+      { path: 'pannes/new', component: PanneFormComponent },
+      { path: 'pannes/edit/:id', component: PanneFormComponent },
+      { path: 'pannes/detail/:id', component: PanneDetailComponent },
+      { path: 'equipments/new', component: EquipmentFormComponent },
+      { path: 'equipments/edit/:id', component: EquipmentFormComponent },
+      { path: 'users/register', component: RegisterComponent },
+      { path: '**', redirectTo: 'admin' }
+    ]},
+
+  { path: 'user', component: UserDashboardComponent, children: [
+      { path: 'create-ticket', component: CreateTicketComponent },
+      {  path : 'my-tickets', component : UserTicketsComponent},
+      { path: 'panne-equipment', component: PanneEquipmentListComponent },
+      { path: 'user/create-ticket', component: CreateTicketComponent },
+      { path: '**', redirectTo: 'user' }
+    ]},
+
+  { path: 'technicien', component: TechnicianDashboardComponent, children: [
+      { path: 'technician-tickets', component: TechnicienTicketsComponent },
+      { path: '**', redirectTo: 'technicien' }
+    ]},
 
 
 ];

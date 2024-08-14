@@ -56,14 +56,27 @@ export class RegisterComponent implements OnInit {
       this.srv.register(formData).subscribe(
         () => {
           this.route.navigateByUrl("login");
+        },
+        (error) => {
+          console.error('Registration failed', error);
+          // Display error to the user
         }
       );
 
       console.log(formData);
     }
   }
+   /*register(user: Personne): Observable<any> {
+   return this.http.post(`${this.apiUrl}/register`, user, { responseType: 'text' }).pipe(
+    catchError(error => {
+   console.error('Registration error', error);
+   return throwError(error);
+   })
+    );
+    }*/
 
-  private mapRoleToType(role: string): string {
+
+private mapRoleToType(role: string): string {
     switch (role) {
       case 'ROLE_USER':
         return 'user';

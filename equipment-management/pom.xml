@@ -123,7 +123,25 @@
 			<version>1.4.2.Final</version>
 		</dependency>
 
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.15.2</version> <!-- Use the latest version available -->
+		</dependency>
 
+		<!-- Jackson Annotations -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>2.15.2</version> <!-- Use the latest version available -->
+		</dependency>
+
+		<!-- Jackson Core -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>2.15.2</version> <!-- Use the latest version available -->
+		</dependency>
 
 		<!-- JJWT dependencies -->
 		<dependency>
@@ -229,7 +247,7 @@
 	</dependencies>
 
 	<build>
-
+   <finalName>itsupport</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

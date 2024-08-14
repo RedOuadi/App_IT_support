@@ -83,6 +83,10 @@ export class PanneService {
     console.error('An error occurred:', error.error.message);
     return throwError(() => new Error('An error occurred; please try again later.'));
   }
+  getTotalPannes(): Observable<number> {
+    return this.http.get<number>(`${this.apiUrl}/total`);
+  }
+
 
 
 }

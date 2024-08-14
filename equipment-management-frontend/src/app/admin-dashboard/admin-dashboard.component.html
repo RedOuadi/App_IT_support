@@ -1,8 +1,77 @@
+<div class="admin-dashboard">
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <h2>Admin Panel</h2>
+      <button (click)="logout()" class="logout-button">
+        <i class="fa fa-sign-out-alt"></i> Log Out
+      </button>
+    </div>
+    <ul class="nav-links">
+      <li (click)="setActive('equipments')">
+        <a [routerLink]="['/admin/equipments']" routerLinkActive="active">
+          <i class="fa fa-cogs"></i> Équipements
+        </a>
+      </li>
+      <li (click)="setActive('pannes')">
+        <a [routerLink]="['/admin/pannes']" routerLinkActive="active">
+          <i class="fa fa-wrench"></i> Pannes
+        </a>
+      </li>
+      <li (click)="setActive('admin-tickets')">
+        <a [routerLink]="['/admin/admin-tickets']" routerLinkActive="active">
+          <i class="fa fa-ticket-alt"></i> Tickets
+        </a>
+      </li>
+      <li (click)="setActive('users')">
+        <a [routerLink]="['/admin/users']" routerLinkActive="active">
+          <i class="fa fa-users"></i> Comptes
+        </a>
+      </li>
+    </ul>
+  </div>
 
-<nav>
-  <a routerLink="/pannes/new">Créer un Ticket</a>
-</nav>
-<app-equipment-list></app-equipment-list>
-<app-admin-tickets>
-</app-admin-tickets>
-<app-panne-list></app-panne-list>
+  <!-- Content -->
+  <div class="content">
+    <div class="header">
+      <h1>Dashboard Overview</h1>
+      <button (click)="openAdminInfo()" class="info-button">
+        <i class="fa fa-user"></i> Voir Info Admin
+      </button>
+    </div>
+    <div class="stats-container">
+      <div class="stat-card">
+        <div class="stat-icon"><i class="fa fa-cogs"></i></div>
+        <div class="stat-details">
+          <h3>{{ totalEquipments }}</h3>
+          <p>Total Équipements</p>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon"><i class="fa fa-wrench"></i></div>
+        <div class="stat-details">
+          <h3>{{ totalPannes }}</h3>
+          <p>Total Pannes</p>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon"><i class="fa fa-ticket-alt"></i></div>
+        <div class="stat-details">
+          <h3>{{ totalTickets }}</h3>
+          <p>Total Tickets</p>
+        </div>
+      </div>
+    </div>
+    <router-outlet></router-outlet>
+  </div>
+
+  <!-- Admin Info Modal -->
+  <div *ngIf="showAdminInfo" class="modal-overlay">
+    <div class="modal">
+      <h3>Admin Information</h3>
+      <p><strong>Nom:</strong> {{ adminProfile?.nom }}</p>
+      <p><strong>Email:</strong> {{ adminProfile?.email }}</p>
+      <button (click)="closeAdminInfo()" class="close-button">Close</button>
+    </div>
+  </div>
+</div>

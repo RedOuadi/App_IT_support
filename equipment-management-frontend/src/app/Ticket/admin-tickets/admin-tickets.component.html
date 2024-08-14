@@ -1,0 +1,32 @@
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Description</th>
+        <th>Status</th>
+        <th>User ID</th>
+        <th>Technician ID</th>
+        <th>Panne ID</th>
+        <th>Update Technician</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let ticket of tickets">
+        <td>{{ ticket.id }}</td>
+        <td>{{ ticket.description }}</td>
+        <td>{{ ticket.etatTicket }}</td>
+        <td>{{ ticket.userId }}</td>
+        <td>{{ ticket.technicienId }}</td>
+        <td>{{ ticket.panneId }}</td>
+        <td>
+            <div class="input-group">
+                <input type="number" class="form-control" [(ngModel)]="ticket.newTechnicianId" placeholder="Technician ID">
+                <button class="btn btn-primary" (click)="updateTechnician(ticket)">
+                    <i class="bi bi-arrow-repeat"></i> Update
+                </button>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>
+

@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -91,4 +92,13 @@ public abstract class Personne implements UserDetails {
     public boolean hasRole(String role) {
         return roles.contains(role);
     }
+
+    @PrePersist
+    @PreUpdate
+    private void setUsername() {
+        if (this.username == null) {
+            this.username = this.email;
+        }
+    }
+
 }

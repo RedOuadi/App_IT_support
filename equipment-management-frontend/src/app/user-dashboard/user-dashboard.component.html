@@ -1,44 +1,49 @@
-<p>user-dashboard works!</p>
+<div class="user-dashboard">
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <h2>User Dashboard</h2>
+      <button (click)="logout()" class="logout-button">
+        <i class="fa fa-sign-out-alt"></i> Log Out
+      </button>
+    </div>
+    <ul class="nav-links">
+      <li (click)="setActive('create-ticket')">
+        <a [routerLink]="['/user/create-ticket']" routerLinkActive="active">
+          <i class="fa fa-ticket-alt"></i> Créer un Ticket
+        </a>
+      </li>
+      <li (click)="setActive('my-tickets')">
+        <a [routerLink]="['/user/my-tickets']" routerLinkActive="active">
+          <i class="fa fa-list"></i> Voir mes Tickets
+        </a>
+      </li>
+      <li (click)="setActive('panne-history')">
+        <a [routerLink]="['/user/panne-history']" routerLinkActive="active">
+          <i class="fa fa-history"></i> Historique des Pannes
+        </a>
+      </li>
+    </ul>
+  </div>
 
-<nav>
-  <ul>
-    <!-- Autres liens de navigation -->
-    <li><a routerLink="/historique-pannes">Historique des Pannes</a></li>
-  </ul>
-</nav>
+  <!-- Content -->
+  <div class="content">
+    <div class="header">
+      <h1>Bienvenue sur le tableau de bord utilisateur</h1>
+      <button (click)="openUserInfo()" class="info-button">
+        <i class="fa fa-user"></i> Voir Info Utilisateur
+      </button>
+    </div>
+    <router-outlet></router-outlet>
+  </div>
 
-<nav>
-  <a routerLink="/create-ticket">Créer un Ticket</a>
-</nav>
-
-<div *ngIf="user">
-  <h2>Profil Utilisateur</h2>
-  <p><strong>id:</strong> {{ user.id }}</p>
-  <p><strong>Email:</strong> {{ user.email }}</p>
-  <p><strong>Rôle:</strong> {{ user.role }}</p>
+  <!-- User Info Modal -->
+  <div *ngIf="showUserInfo" class="modal-overlay">
+    <div class="modal">
+      <h3>Informations Utilisateur</h3>
+      <p><strong>Nom:</strong> {{ user?.nom }}</p>
+      <p><strong>Email:</strong> {{ user?.email }}</p>
+      <button (click)="closeUserInfo()" class="close-button">Fermer</button>
+    </div>
+  </div>
 </div>
-<div *ngIf="user">
-  <h2>Bienvenue, {{ user.nom }}</h2>
-  <h3>Vos Tickets</h3>
-  <table>
-    <thead>
-    <tr>
-      <th>ID</th>
-      <th>Description</th>
-      <th>État</th>
-      <th>Panne ID</th>
-      <th>Technicien ID</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let ticket of tickets">
-      <td>{{ ticket.id }}</td>
-      <td>{{ ticket.description }}</td>
-      <td>{{ ticket.etatTicket }}</td>
-      <td>{{ ticket.panneId}}</td>
-      <td>{{ ticket.technicienId }}</td>
-    </tr>
-    </tbody>
-  </table>
-</div>
-<app-panne-equipment-list></app-panne-equipment-list>

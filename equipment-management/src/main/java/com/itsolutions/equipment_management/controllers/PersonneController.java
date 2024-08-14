@@ -28,15 +28,31 @@ public class PersonneController {
     private PasswordEncoder passwordEncoder;
 
     @PostMapping("/register")
-    public void registerUser(@RequestBody Personne userRequest) {
+    public ResponseEntity<String> registerUser(@RequestBody Personne userRequest) {
         Optional<Personne> existingUser = personneService.findByEmail(userRequest.getEmail());
         if (existingUser.isPresent()) {
-            ResponseEntity.status(400).body("Email already registered");
+            return ResponseEntity.status(400).body("Email already registered");
         }
 
         Personne newUser = personneService.registerPersonne(userRequest);
-         ResponseEntity.ok("User registered successfully");
+        return ResponseEntity.ok("User registered successfully");
     }
+
+   /* @PostMapping("/register")
+    public ResponseEntity<Map<String, String>> registerUser(@RequestBody Personne userRequest) {
+        Optional<Personne> existingUser = personneService.findByEmail(userRequest.getEmail());
+        if (existingUser.isPresent()) {
+            Map<String, String> response = new HashMap<>();
+            response.put("message", "Email already registered");
+            return ResponseEntity.status(400).body(response);
+        }
+
+        Personne newUser = personneService.registerPersonne(userRequest);
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "User registered successfully");
+        return ResponseEntity.ok(response);
+    }  */
+
 
     @PostMapping("/login")
     public ResponseEntity<?> loginUser(@RequestBody Map<String, String> userRequest) {

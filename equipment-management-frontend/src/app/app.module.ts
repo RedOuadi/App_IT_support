@@ -24,7 +24,21 @@ import {TicketListComponent} from "./Ticket/ticket-list/ticket-list.component";
 import {CreateTicketComponent} from "./Ticket/create-ticket/create-ticket.component";
 import {AdminTicketsComponent} from "./Ticket/admin-tickets/admin-tickets.component";
 import {TechnicienTicketsComponent} from "./Ticket/technicien-tickets/technicien-tickets.component";
+import {MatSidenavModule} from "@angular/material/sidenav";
+import {MatToolbarModule} from "@angular/material/toolbar";
+import {MatButtonModule} from "@angular/material/button";
+import {MatListModule} from "@angular/material/list";
+import {MatIconModule} from "@angular/material/icon";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {MatLegacyListModule} from "@angular/material/legacy-list";
+import { MatCardModule } from '@angular/material/card';
+import {MatInputModule} from "@angular/material/input";
+import {MatTableModule} from "@angular/material/table";
+import {MatSelectModule} from "@angular/material/select";
 
+
+
+// @ts-ignore
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,6 +59,8 @@ import {TechnicienTicketsComponent} from "./Ticket/technicien-tickets/technicien
     TechnicienTicketsComponent,
     HomeComponent,
     AdminDashboardComponent,
+    TicketListComponent,
+
 
 
   ],
@@ -54,7 +70,22 @@ import {TechnicienTicketsComponent} from "./Ticket/technicien-tickets/technicien
     HttpClientModule,
     AppRoutingModule,
     ReactiveFormsModule,
-
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatListModule,
+    MatIconModule,
+    MatLegacyListModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatListModule,
+    MatIconModule,
+    MatCardModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatTableModule,
+    MatSelectModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
