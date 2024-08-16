@@ -11,7 +11,7 @@ import {TicketDTOcreat} from "../DTO/TicketDTOcreat";
 })
 
 export class TicketService {
-  private apiUrl = 'http://localhost:8080/api/tickets';
+  private apiUrl = 'http://localhost:8084/api/tickets';
 
   private httpOptions = {
     headers: new HttpHeaders({

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-//terminer test gestion equipment
+
 @CrossOrigin(origins = "http://localhost:4200/")
 
 @RestController
@@ -50,5 +50,12 @@ public class EquipmentController {
     @GetMapping("/total")
     public ResponseEntity<Long> getTotalEquipments() {
         return ResponseEntity.ok(equipmentService.getTotalEquipments());
+    }
+
+    @GetMapping("/max")
+    public ResponseEntity<Long>maxcount(Long id){
+        int a=equipmentService.maxcount(id);
+        return ResponseEntity.ok((long) a);
+
     }
 }

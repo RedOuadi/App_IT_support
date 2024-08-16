@@ -104,4 +104,6 @@ public class PanneService {
     public Long getTotalPannes() {
         return  panneRepository.count();
     }
+
+
 }

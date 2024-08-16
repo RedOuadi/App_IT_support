@@ -12,7 +12,6 @@ export class PanneListComponent implements OnInit {
   keyword: string = '';
   etatPanne: EtatPanne | '' = '';
   etatPanneOptions: string[] = Object.values(EtatPanne);
-  displayedColumns: string[] = ['description', 'etatPanne', 'actions'];
 
   constructor(private panneService: PanneService) {}
 
@@ -21,12 +20,14 @@ export class PanneListComponent implements OnInit {
   }
 
   loadPannes(): void {
-    this.panneService.getAllPannes().subscribe((data) => {
-      this.pannes = data.map(panne => {
-        // Convertir les dates au format Date
-        return panne;
-      });
-    });
+    this.panneService.getAllPannes().subscribe({
+      next: (response) => {
+        this.pannes = response;
+      },
+      error: (error) => {
+        console.log(error)}
+      }
+    );
   }
 
   deletePanne(id: number): void {

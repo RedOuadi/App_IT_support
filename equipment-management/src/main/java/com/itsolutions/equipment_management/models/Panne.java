@@ -43,6 +43,7 @@ public class Panne {
 
     @JsonManagedReference(value = "panne-tickets")
     @OneToMany(mappedBy = "panne")
+    @JsonIgnore
     private List<Ticket> tickets;
     @ManyToMany
     @JoinTable(
@@ -50,6 +51,7 @@ public class Panne {
             joinColumns = @JoinColumn(name = "panne_id"),
             inverseJoinColumns = @JoinColumn(name = "equipment_id")
     )
+    @JsonIgnore
     private Set<Equipment> equipments = new HashSet<>();
 
     @Transient

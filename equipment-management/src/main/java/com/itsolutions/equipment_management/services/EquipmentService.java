@@ -41,4 +41,8 @@ public class EquipmentService {
     public long getTotalEquipments() {
         return equipmentRepository.count();
     }
+
+    public int maxcount(Long id){
+        return equipmentRepository.countmax(id);
+    }
 }

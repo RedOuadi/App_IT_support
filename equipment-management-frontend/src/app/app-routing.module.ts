@@ -20,6 +20,7 @@ import {AdminTicketsComponent} from "./Ticket/admin-tickets/admin-tickets.compon
 import {TechnicienTicketsComponent} from "./Ticket/technicien-tickets/technicien-tickets.component";
 import {TicketListComponent} from "./Ticket/ticket-list/ticket-list.component";
 import {UserTicketsComponent} from "./Ticket/user-tickets/user-tickets.component";
+import {CountComponent} from "./count/count.component";
 
 
 const routes: Routes = [
@@ -44,16 +45,18 @@ const routes: Routes = [
   { path: 'technicien-tickets', component: TechnicienTicketsComponent },
   { path: 'tickets', component: TicketListComponent },
   { path: 'home', component: HomeComponent },
+  { path:  'count', component:CountComponent},
 
   { path: 'admin', component: AdminDashboardComponent, children: [
       { path: 'equipments', component: EquipmentListComponent },
       { path: 'pannes', component: PanneListComponent },
+      { path: 'equipments/new', component: EquipmentFormComponent },
       { path: 'admin-tickets', component: TicketListComponent },
-      { path: '', redirectTo: 'equipments', pathMatch: 'full' },
+
       { path: 'pannes/new', component: PanneFormComponent },
       { path: 'pannes/edit/:id', component: PanneFormComponent },
       { path: 'pannes/detail/:id', component: PanneDetailComponent },
-      { path: 'equipments/new', component: EquipmentFormComponent },
+
       { path: 'equipments/edit/:id', component: EquipmentFormComponent },
       { path: 'users/register', component: RegisterComponent },
       { path: '**', redirectTo: 'admin' }

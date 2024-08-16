@@ -25,9 +25,8 @@ export class PanneService {
   constructor(private http: HttpClient , private    personneService:PersonneService) {}
 
   reportPanne(panne: Panne): Observable<Panne> {
-    return this.http.post<Panne>(`${this.apiUrl}/report`, panne);
+    return this.http.post<Panne>(`${this.apiUrl}/report`, panne, { headers: this.getHeaders() });
   }
-
   getPannesByEquipmentId(equipmentId: number): Observable<Panne[]> {
     return this.http.get<Panne[]>(`${this.apiUrl}/equipment/${equipmentId}`).pipe(
       catchError(this.handleError)

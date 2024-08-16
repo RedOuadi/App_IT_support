@@ -35,6 +35,8 @@ import { MatCardModule } from '@angular/material/card';
 import {MatInputModule} from "@angular/material/input";
 import {MatTableModule} from "@angular/material/table";
 import {MatSelectModule} from "@angular/material/select";
+import { UserTicketsComponent } from './Ticket/user-tickets/user-tickets.component';
+import { CountComponent } from './count/count.component';
 
 
 
@@ -60,6 +62,10 @@ import {MatSelectModule} from "@angular/material/select";
     HomeComponent,
     AdminDashboardComponent,
     TicketListComponent,
+    UserTicketsComponent,
+    CountComponent,
+
+
 
 
 

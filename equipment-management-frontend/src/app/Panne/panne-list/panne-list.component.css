@@ -1,48 +1,65 @@
-/* Container Styling */
-.panne-container {
-  padding: 20px;
-  background-color: #fbbf24;
-  border-radius: 8px;
-}
-
-/* Header Styling */
-h2 {
-  color: #1e3a8a;
-  font-size: 24px;
-}
-
-/* Search Bar and Select Styling */
-.search-bar {
+.panne-cards {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #fff;
-  padding: 10px;
-  border-radius: 8px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
   flex-wrap: wrap;
+  gap: 20px;
 }
 
-/* Table Styling */
-.mat-elevation-z8 {
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+.panne-card {
+  width: calc(33.333% - 20px); /* Three cards per row */
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
 }
 
-.no-results {
-  margin-top: 20px;
-  color: #e53e3e;
+.card-body {
+  padding: 15px;
+}
+
+.card-title {
+  font-size: 20px;
+  color: #1e3a8a;
+}
+
+.card-text {
+  color: #4a5568;
+  margin-bottom: 15px;
+}
+
+.card-actions {
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+.action-button {
+  padding: 8px 12px;
+  color: white;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-info {
+  background-color: #1e3a8a;
+}
+
+.btn-danger {
+  background-color: #e53e3e;
+}
+
+.action-button:hover {
+  opacity: 0.8;
 }
 
 /* Media Queries for Responsiveness */
-@media (max-width: 768px) {
-  .search-bar {
-    flex-direction: column;
+@media (max-width: 992px) {
+  .panne-card {
+    width: calc(50% - 20px); /* Two cards per row */
   }
 }
 
-@media (max-width: 480px) {
-  h2 {
-    font-size: 20px;
+@media (max-width: 768px) {
+  .panne-card {
+    width: 100%; /* One card per row */
   }
 }
